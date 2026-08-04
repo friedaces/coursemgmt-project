@@ -5,19 +5,35 @@
 #include <iostream>
 #include <cstring>
 
-class Courses {
+class Course
+{
 private:
-	int number;
-	string name;
-	string schedule;
+	char* courseNumber;
+	char* courseName;
+	char* schedule;
 	double price;
-public:
-	Courses(); // default constructor
-	Courses(int n, string na, string sch, double p);
 
-	void display() const;   // prints itself 
-	void saveToFile(ofstream& outFile) const; //writes itself to the csv
+public:
+	Course();
+	Course(const char* cNum, const char* cName, const char* sch, double p);
+	Course(const Course& other);
+	Course& operator=(const Course& other);
+	~Course();
+
+	// Getters
+	const char* getCourseNumber() const;
+	const char* getCourseName() const;
+	const char* getSchedule() const;
+	double getPrice() const;
+
+	// setters
+	void setCourseNumber(const char* cNum);
+	void setCourseName(const char* cName);
+	void setSchedule(const char* sch);
+	void setPrice(double p);
+
+	void displayCourse() const;
+
 };
 
-void addCourse();
-#endif
+#endif // !COURSE_H
