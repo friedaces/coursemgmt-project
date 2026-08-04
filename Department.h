@@ -29,4 +29,4 @@ public:
 	void displayDepartment() const;
 };
 
-#endif
+#endif#pragma once
