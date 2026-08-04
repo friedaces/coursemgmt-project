@@ -1,5 +1,5 @@
-
 #include "Cart.h"
+#include <cstring>
 
 using namespace std;
 
@@ -54,16 +54,17 @@ void Cart::addCourse(const Course& course, const char* selectedSchedule) {
     totalCount++;
     totalCost += course.getPrice();
 }
+
 // Getting the total before completing the purchase
 void Cart::listCourses() const {
     if (totalCount == 0) {
-        std::cout << "\nYour cart is empty.\n";
+        cout << "\nYour cart is empty.\n";
         return;
     }
 
-    std::cout << "\n Selected Courses in Cart \n";
+    cout << "\nSelected Courses in Cart\n";
     for (int i = 0; i < totalCount; ++i) {
-        std::cout << i + 1 << ". " << courses[i].getCourseNumber()
+        cout << i + 1 << ". " << courses[i].getCourseNumber()
             << " | " << courses[i].getCourseName()
             << " | Sched: " << schedules[i]
             << " | Price: $" << courses[i].getPrice() << "\n";
@@ -72,19 +73,19 @@ void Cart::listCourses() const {
     double tax = totalCost * TAX_RATE;
     double finalPrice = totalCost + tax;
 
-    std::cout << "_______\n";
-    std::cout << "Subtotal: $" << totalCost << "\n";
-    std::cout << "Tax (13%): $" << tax << "\n";
-    std::cout << "Total Cost: $" << finalPrice << "\n";
+    cout << "_______\n";
+    cout << "Subtotal: $" << totalCost << "\n";
+    cout << "Tax (13%): $" << tax << "\n";
+    cout << "Total Cost: $" << finalPrice << "\n";
 }
 
-//Checking out with cart
+// Checking out with cart
 void Cart::checkout() {
     if (totalCount == 0) {
-        std::cout << "\nNo courses in the cart\n";
+        cout << "\nNo courses in the cart\n";
     }
     else {
-        std::cout << "\nThank you for your purchase!\n";
+        cout << "\nThank you for your purchase!\n";
         clearCart();
     }
 }
