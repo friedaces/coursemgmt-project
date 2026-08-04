@@ -1,6 +1,4 @@
-
 #include "Course.h"
-#include <cstring>
 
 Course::Course() {
     courseNumber = nullptr;
@@ -105,7 +103,7 @@ void Course::setSchedule(const char* sched) {
 void Course::setPrice(double p) { price = p; }
 
 void Course::displayCourse() const {
-    std::cout << getCourseNumber() << " - " << getCourseName()
+    cout << getCourseNumber() << " - " << getCourseName()
         << " | Sched: " << getSchedule()
-        << " | Price: $" << price << "\n";
+        << " | Price: $" << price << endl;
 }
