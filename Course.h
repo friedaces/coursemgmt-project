@@ -18,4 +18,6 @@ public:
 	void display() const;   // prints itself 
 	void saveToFile(ofstream& outFile) const; //writes itself to the csv
 };
+
+void addCourse();
 #endif
