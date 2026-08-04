@@ -10,11 +10,11 @@ private:
     char** schedules;       // Parallel array to hold selected schedules
     int totalCount;
     double totalCost;
-    const double TAX_RATE = 0.13;
+    const double TAX_RATE = 0.13; // Must add the taxes
 
 public:
     Cart();
-    ~Cart();
+    ~Cart(); //Destructors
 
     void addCourse(const Course& course, const char* selectedSchedule);
     void listCourses() const;
