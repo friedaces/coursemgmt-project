@@ -54,7 +54,7 @@ void Cart::addCourse(const Course& course, const char* selectedSchedule) {
     totalCount++;
     totalCost += course.getPrice();
 }
-
+// Getting the total before completing the purchase
 void Cart::listCourses() const {
     if (totalCount == 0) {
         std::cout << "\nYour cart is empty.\n";
@@ -72,12 +72,13 @@ void Cart::listCourses() const {
     double tax = totalCost * TAX_RATE;
     double finalPrice = totalCost + tax;
 
-    std::cout << "-----\n";
+    std::cout << "_______\n";
     std::cout << "Subtotal: $" << totalCost << "\n";
     std::cout << "Tax (13%): $" << tax << "\n";
     std::cout << "Total Cost: $" << finalPrice << "\n";
 }
 
+//Checking out with cart
 void Cart::checkout() {
     if (totalCount == 0) {
         std::cout << "\nNo courses in the cart\n";
