@@ -10,9 +10,9 @@ public:
     void showMenu() override;
 
 private:
-    void listAllDepartments();      // Option 1: List Departments
-    void addDepartment();           // Option 2: Add Department
-    void addCourseToDepartment();   // Option 3: Add Course to Department
-    void saveChangesToCSV();        // Option 4: Save Changes to CSV
+    void listAllDepartments();      // Option 1: List Departments function
+    void addDepartment();           // Option 2: Add Department function
+    void addCourseToDepartment();   // Option 3: Add Course to Department function
+    void saveChangesToCSV();        // Option 4: Save Changes to CSV function
 };
 #endif
