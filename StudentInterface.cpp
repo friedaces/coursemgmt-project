@@ -28,7 +28,7 @@ void StudentInterface::showMenu() {
         switch (choice) {
         case 1:
             showCartMenu();
-            break;
+            break; // intentional break to go back to main menu
         case 2:
             browseDepartmentsMenu();
             break;
