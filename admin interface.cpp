@@ -3,13 +3,10 @@
 #include "Course.h"
 #include <iostream>
 #include <string>
-#include <fstream> //fstream for csv file so we can import and export file stream
-
-//importing all relevant header files
+#include <fstream> 
 
 using namespace std;
 
-//using extern so we can acess global variables from main.cpp like the 
 extern Department* StoreDepartments;
 extern int TotalDepartments;
 extern const char* csvFile;
@@ -23,7 +20,7 @@ void AdminInterface::showMenu() {
 
     cout << endl;
     cout << "Welcome, admin!" << endl;
-
+    //presenting all the options and directing each input to the relevant function
     while (running) {
         cout << endl;
         cout << "Options: " << endl;
@@ -50,30 +47,31 @@ void AdminInterface::showMenu() {
             saveChangesToCSV();
         }
         else if (adminChoice == 5) {
-            running = false; // this is what stops the while loop
+            running = false; 
             cout << "Exiting Admin Interface..." << endl;
         }
     }
 }
 
+//loop through and print all departments with their index plus one to properly number them
 void AdminInterface::listAllDepartments() {
     for (int i = 0; i < TotalDepartments; i++) {
-        cout << i + 1 << ". " << StoreDepartments[i].getDeptName() << endl; //loop through and print all departments with their index plus one to properly number them
+        cout << i + 1 << ". " << StoreDepartments[i].getDeptName() << endl; 
     }
     if (TotalDepartments == 0) {
         cout << "No departments at the moment. " << endl;
     }
 }
-
+//prompt user to enter department name
 void AdminInterface::addDepartment() {
     string deptName;
     cout << "Enter department name: " << endl;
-    cin.ignore(1000, '\n'); //using ignore so you ignore the newline
-    getline(cin, deptName); //using getline so you can enter multiple words
+    cin.ignore(1000, '\n'); 
+    getline(cin, deptName); 
 
     while (deptName.empty()) {
         cout << "Please enter a valid department name: ";
-        cin.ignore(1000, '\n'); //if the deptname space is empty, prompt them to enter it
+        cin.ignore(1000, '\n'); 
         getline(cin, deptName);
     }
 
@@ -95,10 +93,11 @@ void AdminInterface::addDepartment() {
     cout << "Department added successfully." << endl;
 }
 
+//show all departments and prompt user to add course to dept
 void AdminInterface::addCourseToDepartment() {
     listAllDepartments();
     if (TotalDepartments == 0) {
-        return;   // if there are no departments to add a course to, return
+        return;   
     }
 
     cout << "Enter department number [0 to go back]" << endl;
@@ -118,35 +117,34 @@ void AdminInterface::addCourseToDepartment() {
 
     cout << "Enter course Name: ";
     cin.ignore(1000, '\n');
-    getline(cin, course_name);   // getline so multiple word names work
+    getline(cin, course_name);   
 
     cout << "Enter course schedule [M/W, T/R, or W/F]: ";
     cin >> course_sch;
 
-    while (course_sch != "M/W" && course_sch != "T/R" && course_sch != "W/F") { //if the course schedule is none of these
+    while (course_sch != "M/W" && course_sch != "T/R" && course_sch != "W/F") { 
         cout << "Please enter a valid course schedule [M/W, T/R, or W/F]: ";
         cin >> course_sch;
-    } // prompt until the input is valid
+    } 
 
     cout << "Enter course price: ";
     cin >> course_price;
 
-    Course newCourse(course_num.c_str(), course_name.c_str(), course_sch.c_str(), course_price); //creating an object of the course class with the user input
+    Course newCourse(course_num.c_str(), course_name.c_str(), course_sch.c_str(), course_price); 
 
-    StoreDepartments[choice - 1].addCourse(newCourse); // -1 to get the actual index since we added 1 before for proper numbering
+    StoreDepartments[choice - 1].addCourse(newCourse); 
 
     cout << "Course added successfully." << endl;
 }
 
 // SAVING TO CSV: writes all modifications (departments and courses) to the csv file
 void AdminInterface::saveChangesToCSV() {
-    ofstream outFile(csvFile); //this uses the streamheader
+    ofstream outFile(csvFile); 
 
-    outFile << TotalDepartments << endl; //writes total departments to the outfile
-
+    outFile << TotalDepartments << endl; 
     for (int i = 0; i < TotalDepartments; i++) {
         Department& dept = StoreDepartments[i];
-        outFile << dept.getDeptName() << "," << dept.getTotalCourses() << endl; //storing department names and courses
+        outFile << dept.getDeptName() << "," << dept.getTotalCourses() << endl; 
 
         Course* deptCourses = dept.getCourses();
         for (int j = 0; j < dept.getTotalCourses(); j++) {
