@@ -7,7 +7,7 @@ class AdminInterface : public Interface {
 public:
     AdminInterface();
     ~AdminInterface();
-    void showMenu() override;
+    void showMenu() override; //tells the compiler it's intended to replace a virtual function from a base class
 
 private:
     void listAllDepartments();      // Option 1: List Departments function
