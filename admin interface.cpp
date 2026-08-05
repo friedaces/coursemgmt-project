@@ -1,13 +1,15 @@
-#include "AdminInterface.h"
+#include "AdminInterface.h" 
 #include "Department.h"
 #include "Course.h"
 #include <iostream>
 #include <string>
-#include <fstream>
+#include <fstream> //fstream for csv file so we can import and export file stream
+
+//importing all relevant header files
 
 using namespace std;
 
-// Access global variables from main.cpp
+//using extern so we can acess global variables from main.cpp like the 
 extern Department* StoreDepartments;
 extern int TotalDepartments;
 extern const char* csvFile;
@@ -56,7 +58,7 @@ void AdminInterface::showMenu() {
 
 void AdminInterface::listAllDepartments() {
     for (int i = 0; i < TotalDepartments; i++) {
-        cout << i + 1 << ". " << StoreDepartments[i].getDeptName() << endl;
+        cout << i + 1 << ". " << StoreDepartments[i].getDeptName() << endl; //loop through and print all departments with their index plus one to properly number them
     }
     if (TotalDepartments == 0) {
         cout << "No departments at the moment. " << endl;
@@ -66,29 +68,29 @@ void AdminInterface::listAllDepartments() {
 void AdminInterface::addDepartment() {
     string deptName;
     cout << "Enter department name: " << endl;
-    cin.ignore(1000, '\n');
-    getline(cin, deptName);
+    cin.ignore(1000, '\n'); //using ignore so you ignore the newline
+    getline(cin, deptName); //using getline so you can enter multiple words
 
     while (deptName.empty()) {
         cout << "Please enter a valid department name: ";
-        cin.ignore(1000, '\n');
+        cin.ignore(1000, '\n'); //if the deptname space is empty, prompt them to enter it
         getline(cin, deptName);
     }
 
-    // making a new array one bigger than the current
+    // making a new array one bigger than the current to add the new department to
     Department* newDepts = new Department[TotalDepartments + 1];
-    // copying everything old over (uses the deep-copy assignment operator)
+    // copying everything old over to the new array using deep copy assignment operator
     for (int i = 0; i < TotalDepartments; i++) {
         newDepts[i] = StoreDepartments[i];
     }
     // adding the new department in the last place of the array
     newDepts[TotalDepartments] = Department(deptName.c_str());
 
-    delete[] StoreDepartments;
+    delete[] StoreDepartments; //freeing the memory
     // swapping the pointer to point to the new array
     StoreDepartments = newDepts;
 
-    TotalDepartments++;
+    TotalDepartments++;//increase the department count to match
 
     cout << "Department added successfully." << endl;
 }
@@ -108,7 +110,7 @@ void AdminInterface::addCourseToDepartment() {
 
     string course_num;
     string course_name;
-    string course_sch;
+    string course_sch; //schedule
     double course_price;
 
     cout << "Enter the course number: ";
@@ -121,30 +123,30 @@ void AdminInterface::addCourseToDepartment() {
     cout << "Enter course schedule [M/W, T/R, or W/F]: ";
     cin >> course_sch;
 
-    while (course_sch != "M/W" && course_sch != "T/R" && course_sch != "W/F") {
+    while (course_sch != "M/W" && course_sch != "T/R" && course_sch != "W/F") { //if the course schedule is none of these
         cout << "Please enter a valid course schedule [M/W, T/R, or W/F]: ";
         cin >> course_sch;
-    } // checking the input is valid
+    } // prompt until the input is valid
 
     cout << "Enter course price: ";
     cin >> course_price;
 
-    Course newCourse(course_num.c_str(), course_name.c_str(), course_sch.c_str(), course_price);
+    Course newCourse(course_num.c_str(), course_name.c_str(), course_sch.c_str(), course_price); //creating an object of the course class with the user input
 
-    StoreDepartments[choice - 1].addCourse(newCourse); // -1 to get the actual index
+    StoreDepartments[choice - 1].addCourse(newCourse); // -1 to get the actual index since we added 1 before for proper numbering
 
     cout << "Course added successfully." << endl;
 }
 
 // SAVING TO CSV: writes all modifications (departments and courses) to the csv file
 void AdminInterface::saveChangesToCSV() {
-    ofstream outFile(csvFile);
+    ofstream outFile(csvFile); //this uses the streamheader
 
-    outFile << TotalDepartments << endl;
+    outFile << TotalDepartments << endl; //writes total departments to the outfile
 
     for (int i = 0; i < TotalDepartments; i++) {
         Department& dept = StoreDepartments[i];
-        outFile << dept.getDeptName() << "," << dept.getTotalCourses() << endl;
+        outFile << dept.getDeptName() << "," << dept.getTotalCourses() << endl; //storing department names and courses
 
         Course* deptCourses = dept.getCourses();
         for (int j = 0; j < dept.getTotalCourses(); j++) {
