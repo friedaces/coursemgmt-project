@@ -10,7 +10,7 @@ extern Department* StoreDepartments;
 extern int TotalDepartments;
 
 StudentInterface::StudentInterface() {}
-StudentInterface::~StudentInterface() {}
+StudentInterface::~StudentInterface() {} // destructor of the previous student interface
 
 void StudentInterface::showMenu() {
     int choice = 0;
