@@ -11,7 +11,7 @@ Cart::Cart() {
 }
 
 Cart::~Cart() {
-    clearCart();
+    clearCart(); // a 2 step process for 2d arrays structures
 }
 
 void Cart::clearCart() {
