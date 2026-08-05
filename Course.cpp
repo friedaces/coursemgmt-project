@@ -1,5 +1,6 @@
 #include "Course.h"
 
+// Default constructor
 Course::Course() {
     courseNumber = nullptr;
     courseName = nullptr;
@@ -7,6 +8,7 @@ Course::Course() {
     price = 0.0;
 }
 
+// Constructor that initializes all course information
 Course::Course(const char* cNum, const char* cName, const char* sch, double p) {
     courseNumber = new char[strlen(cNum) + 1];
     strcpy(courseNumber, cNum);
@@ -19,7 +21,7 @@ Course::Course(const char* cNum, const char* cName, const char* sch, double p) {
 
     price = p;
 }
-
+// Copy constructor (creates a deep copy of another Course object)
 Course::Course(const Course& other) {
     if (other.courseNumber) {
         courseNumber = new char[strlen(other.courseNumber) + 1];
@@ -41,7 +43,7 @@ Course::Course(const Course& other) {
 
     price = other.price;
 }
-
+// Copy assignment operator
 Course& Course::operator=(const Course& other) {
     if (this != &other) {
         delete[] courseNumber;
@@ -70,12 +72,14 @@ Course& Course::operator=(const Course& other) {
     }
     return *this;
 }
-
+// Destructor
 Course::~Course() {
     delete[] courseNumber;
     delete[] courseName;
     delete[] schedule;
 }
+
+//getters
 
 const char* Course::getCourseNumber() const { return courseNumber ? courseNumber : ""; }
 const char* Course::getCourseName() const { return courseName ? courseName : ""; }
@@ -88,6 +92,7 @@ void Course::setCourseNumber(const char* cNum) {
     strcpy(courseNumber, cNum);
 }
 
+//setters
 void Course::setCourseName(const char* cName) {
     delete[] courseName;
     courseName = new char[strlen(cName) + 1];
@@ -102,6 +107,7 @@ void Course::setSchedule(const char* sched) {
 
 void Course::setPrice(double p) { price = p; }
 
+// Display the course information
 void Course::displayCourse() const {
     cout << getCourseNumber() << " - " << getCourseName()
         << " | Sched: " << getSchedule()
