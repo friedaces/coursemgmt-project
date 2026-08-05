@@ -4,7 +4,7 @@
 #include <limits>
 
 using namespace std;
-
+// to reset error flags and flushing any remaining new line characters
 void Interface::clearInputBuffer() {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
