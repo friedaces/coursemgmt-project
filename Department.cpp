@@ -1,19 +1,21 @@
 
 #include "Department.h"
 
+// Default constructor
 Department::Department() {
     deptName[0] = '\0';
     courses = nullptr;
     totalCourses = 0;
 }
 
+// Constructor that sets the department name
 Department::Department(const char* name) {
     strncpy(deptName, name, 99);
     deptName[99] = '\0';
     courses = nullptr;
     totalCourses = 0;
 }
-
+// Copy constructor (creates a deep copy of another Department object)
 Department::Department(const Department& other) {
     strcpy(this->deptName, other.deptName);
     this->totalCourses = other.totalCourses;
@@ -28,6 +30,7 @@ Department::Department(const Department& other) {
     }
 }
 
+// Copy assignment operator (handles assigning one Department to another)
 Department& Department::operator=(const Department& other) {
     if (this != &other) {
         delete[] courses;
@@ -45,7 +48,7 @@ Department& Department::operator=(const Department& other) {
     }
     return *this;
 }
-
+// Destructor
 Department::~Department() {
     delete[] courses;
 }
@@ -58,7 +61,7 @@ void Department::setDeptName(const char* name) {
     strncpy(deptName, name, 99);
     deptName[99] = '\0';
 }
-
+// Adds a new course to the department
 void Department::addCourse(const Course& course) {
     Course* temp = new Course[totalCourses + 1];
     for (int i = 0; i < totalCourses; ++i) {
@@ -69,7 +72,7 @@ void Department::addCourse(const Course& course) {
     courses = temp;
     totalCourses++;
 }
-
+// Displays the department information
 void Department::displayDepartment() const {
     std::cout << "Department: " << deptName << "\n";
 }
