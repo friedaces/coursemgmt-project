@@ -12,10 +12,11 @@ private:
 	int totalCourses;
 
 public:
+//default constructor
 	Department();
 	Department(const char* name);
-	Department(const Department& other);
-	Department& operator=(const Department& other);
+	Department(const Department& other); // Copy constructor
+	Department& operator=(const Department& other); // Copy assignment operator
 	~Department();
 
 	//Getters
